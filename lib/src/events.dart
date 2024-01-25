@@ -331,6 +331,24 @@ class StyleImageUnusedEventData {
       : timestamp = json['timestamp'],
         id = json['imageId'];
 }
+/// The class for style-image-remove-unused event in Observer
+class LocationChangedEventData {
+  /// The timestamp of an event when the `map` no longer needs a previously added image.
+  final int timestamp;
+
+  /// The identifier of an image that is not used by the `map`.
+  final String id;
+
+  /// The identifier of an image that is not used by the `map`.
+  final double x;
+  final double y;
+
+  LocationChangedEventData.fromJson(Map<String, dynamic> json)
+      : timestamp = json['timestamp'],
+        x = json['x'],
+        y = json['y'],
+        id = json['imageId'];
+}
 
 /// The class for style-loaded event in Observer
 class StyleLoadedEventData {

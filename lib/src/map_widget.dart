@@ -37,6 +37,7 @@ class MapWidget extends StatefulWidget {
     this.onTapListener,
     this.onLongTapListener,
     this.onScrollListener,
+    this.onLocationChangedListener,
   }) : super(key: key) {
     if (onStyleLoadedListener != null) {
       _eventTypes.add(_MapEvent.styleLoaded);
@@ -76,6 +77,9 @@ class MapWidget extends StatefulWidget {
     }
     if (onStyleImageUnusedListener != null) {
       _eventTypes.add(_MapEvent.styleImageRemoveUnused);
+    }
+    if (onLocationChangedListener != null) {
+      _eventTypes.add(_MapEvent.locationChanged);
     }
   }
 
@@ -141,6 +145,8 @@ class MapWidget extends StatefulWidget {
 
   /// Invoked whenever an image added to the Style is no longer needed and can be removed using StyleManager#removeStyleImage method.
   final OnStyleImageUnusedListener? onStyleImageUnusedListener;
+
+  final OnLocationChangedListener? onLocationChangedListener;
 
   /// Which gestures should be consumed by the map.
   ///
@@ -229,6 +235,7 @@ class _MapWidgetState extends State<MapWidget> {
       onMapTapListener: widget.onTapListener,
       onMapLongTapListener: widget.onLongTapListener,
       onMapScrollListener: widget.onScrollListener,
+      onLocationChangedListener: widget.onLocationChangedListener
     );
     _controller.complete(controller);
     if (widget.onMapCreated != null) {

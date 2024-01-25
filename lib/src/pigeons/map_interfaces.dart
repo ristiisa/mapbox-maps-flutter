@@ -371,6 +371,7 @@ enum _MapEvent {
   renderFrameStarted,
   renderFrameFinished,
   resourceRequest,
+  locationChanged
 }
 
 /// The distance on each side between rectangles, when one is contained into other.

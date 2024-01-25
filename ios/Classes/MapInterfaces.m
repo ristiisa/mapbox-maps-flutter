@@ -2204,6 +2204,7 @@ void SetUpFLT_CameraManager(id<FlutterBinaryMessenger> binaryMessenger, NSObject
         FLTScreenCoordinate *arg_offset = GetNullableObjectAtIndex(args, 5);
         FlutterError *error;
         FLTCameraOptions *output = [api cameraForCoordinateBoundsBounds:arg_bounds padding:arg_padding bearing:arg_bearing pitch:arg_pitch maxZoom:arg_maxZoom offset:arg_offset error:&error];
+        
         callback(wrapResult(output, error));
       }];
     } else {

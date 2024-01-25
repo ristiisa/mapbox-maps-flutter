@@ -87,6 +87,12 @@ extension FLTCoordinateBounds {
         let northeast = convertDictionaryToCLLocationCoordinate2D(dict: self.northeast)
         return CoordinateBounds(southwest: southwest!, northeast: northeast!)
     }
+    
+    func toArray() -> [CLLocationCoordinate2D] {
+        let southwest = convertDictionaryToCLLocationCoordinate2D(dict: self.southwest)
+        let northeast = convertDictionaryToCLLocationCoordinate2D(dict: self.northeast)
+        return [southwest!, northeast!]
+    }
 }
 
 extension FLTCanonicalTileID {

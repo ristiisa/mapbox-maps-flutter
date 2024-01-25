@@ -20,6 +20,7 @@ class MapboxMap extends ChangeNotifier {
     this.onMapTapListener,
     this.onMapLongTapListener,
     this.onMapScrollListener,
+    this.onLocationChangedListener
   }) : _mapboxMapsPlatform = mapboxMapsPlatform {
     _proxyBinaryMessenger = _mapboxMapsPlatform.binaryMessenger;
 
@@ -87,6 +88,11 @@ class MapboxMap extends ChangeNotifier {
     if (onStyleImageUnusedListener != null) {
       _mapboxMapsPlatform.onStyleImageUnusedPlatform.add((argument) {
         onStyleImageUnusedListener?.call(argument);
+      });
+    }
+    if (onLocationChangedListener != null) {
+      _mapboxMapsPlatform.onLocationChangedListenerPlatform.add((argument) {
+        onLocationChangedListener?.call(argument);
       });
     }
     _setupGestures();
@@ -188,6 +194,7 @@ class MapboxMap extends ChangeNotifier {
   OnMapTapListener? onMapTapListener;
   OnMapLongTapListener? onMapLongTapListener;
   OnMapScrollListener? onMapScrollListener;
+  OnLocationChangedListener? onLocationChangedListener;
 
   @override
   void dispose() {

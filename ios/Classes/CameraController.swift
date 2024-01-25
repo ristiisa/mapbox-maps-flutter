@@ -35,14 +35,31 @@ class CameraController: NSObject, FLT_CameraManager {
         offset: FLTScreenCoordinate?,
         error: AutoreleasingUnsafeMutablePointer<FlutterError?>
     ) -> FLTCameraOptions? {
-        let camera = mapboxMap.camera(
+        let triangleCoordinates = bounds.toArray()
+        let referenceCamera = CameraOptions()
+        let camera2 = mapboxMap.camera(
             for: bounds.toCoordinateBounds(),
             padding: padding.toUIEdgeInsets(),
             bearing: bearing?.doubleValue,
             pitch: pitch?.doubleValue,
             maxZoom: maxZoom?.doubleValue,
             offset: offset?.toCGPoint())
-        return camera.toFLTCameraOptions()
+        
+        let camera = (try? mapboxMap.camera(
+                        for: triangleCoordinates,
+                        camera: referenceCamera,
+                        coordinatesPadding: padding.toUIEdgeInsets(),
+                        maxZoom: nil,
+                        offset: nil))
+        if camera != nil {
+            print("CAMERA \(camera?.zoom)")
+            return camera!.toFLTCameraOptions()
+        }
+        
+        
+        print("CAMERA2")
+        
+        return camera2.toFLTCameraOptions()
     }
 
     func camera(
